@@ -1,0 +1,7 @@
+# Visual Studio Code cache/options directory
+.vscode/
+#bin and obj folders
+**/[Bb]in
+**/[Oo]bj
+# macOS
+.DS_Store
