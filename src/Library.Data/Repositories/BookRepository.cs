@@ -14,7 +14,7 @@ public class BookRepository : IBookRepository
 
     public void DeleteById(Guid id)
     {
-        books.RemoveAll(b => b.id == id);
+        books.RemoveAll(b => b.Id == id);
     }
 
     public IEnumerable<Book> GetAll()
@@ -24,6 +24,11 @@ public class BookRepository : IBookRepository
 
     public IEnumerable<Book> Search(string query)
     {
-        return books.Where(b => b.title.Contains(query, StringComparison.OrdinalIgnoreCase));
+        return books.Where(b => b.Title.Contains(query, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public Book GetById(Guid id)
+    {
+        return books.Find(item => item.Id == id);
     }
 }

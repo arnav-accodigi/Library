@@ -8,6 +8,7 @@ public interface IBookService
     void DeleteBookById(Guid id);
     IEnumerable<Book> SearchBook(string query);
     IEnumerable<Book> GetAllBooks();
+    Book GetBookById(Guid id);
     // IEnumerable<Book> GetCheckedOutBooks();
     // void CheckoutBook(int id, DateTime dueDate);
     // void ReturnBook(int id);

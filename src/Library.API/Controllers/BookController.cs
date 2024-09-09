@@ -22,20 +22,39 @@ public class BookController : ControllerBase
         return Ok(bookService.GetAllBooks());
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetBookById(Guid id)
+    {
+        return Ok(bookService.GetBookById(id));
+    }
+
     [HttpPost]
     public IActionResult AddBook([FromBody] BookDto bookDto)
     {
         Book book =
             new()
             {
-                id = Guid.NewGuid(),
-                title = bookDto.Title,
-                author = bookDto.Author,
-                created_on = DateTime.Now,
-                available_quantity = bookDto.AvailableQuantity,
-                total_quantity = bookDto.TotalQuantity
+                Id = Guid.NewGuid(),
+                Title = bookDto.Title,
+                Author = bookDto.Author,
+                CreatedOn = DateTime.Now,
+                AvailableQuantity = bookDto.AvailableQuantity,
+                TotalQuantity = bookDto.TotalQuantity
             };
         bookService.AddBook(book);
-        return Created();
+        return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
+    }
+
+    [HttpGet("Search/{query}")]
+    public IActionResult Search(string query)
+    {
+        return Ok(bookService.SearchBook(query));
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteBook(Guid id)
+    {
+        bookService.DeleteBookById(id);
+        return NoContent();
     }
 }

@@ -2,8 +2,8 @@ namespace Library.Data.Domain;
 
 public class Book : BaseRecord
 {
-    public string title { get; set; }
-    public string author { get; set; }
-    public int total_quantity { get; set; }
-    public int available_quantity { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int TotalQuantity { get; set; }
+    public int AvailableQuantity { get; set; }
 }

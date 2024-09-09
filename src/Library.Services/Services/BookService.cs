@@ -32,4 +32,9 @@ public class BookService : IBookService
     {
         return bookRepository.Search(query);
     }
+
+    public Book GetBookById(Guid id)
+    {
+        return bookRepository.GetById(id);
+    }
 }
