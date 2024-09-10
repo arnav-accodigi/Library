@@ -3,7 +3,7 @@ using Library.Data.Repositories;
 using Library.Services.Services;
 using Moq;
 
-public class BooksTest
+public class BookServiceTest
 {
     private readonly Mock<IBookRepository> bookRepositoryMock;
     private readonly IBookService bookService;
@@ -51,7 +51,7 @@ public class BooksTest
         },
     ];
 
-    public BooksTest()
+    public BookServiceTest()
     {
         bookRepositoryMock = new Mock<IBookRepository>();
         bookRepositoryMock.Setup(r => r.GetAll()).Returns(initialBooks);
