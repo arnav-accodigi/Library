@@ -35,18 +35,6 @@ public class BookController : ControllerBase
         return Ok(new ResponseDto { Data = book });
     }
 
-    [HttpGet("checked-out")]
-    public IActionResult GetCheckedOutBooks()
-    {
-        return Ok(new ResponseDto { Data = bookService.GetCheckedOutBooks() });
-    }
-
-    [HttpGet("available")]
-    public IActionResult GetAvailableBooks()
-    {
-        return Ok(new ResponseDto { Data = bookService.GetAvailableBooks() });
-    }
-
     [HttpPost]
     public IActionResult AddBook([FromBody] BookDto bookDto)
     {

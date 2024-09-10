@@ -23,9 +23,19 @@ public class Book : BaseRecord
         IsCheckedOut = false;
     }
 
+    public bool IsOverdue()
+    {
+        if (IsCheckedOut && ReturnDate.HasValue)
+        {
+            var daysPassedSinceDueDate = (DateTime.Now - ReturnDate.Value).Days;
+            return daysPassedSinceDueDate > 0;
+        }
+        return false;
+    }
+
     public int CalculateLateFee()
     {
-        if (!IsCheckedOut || !ReturnDate.HasValue)
+        if (!IsOverdue())
         {
             return 0;
         }

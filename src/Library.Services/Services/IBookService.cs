@@ -9,7 +9,8 @@ public interface IBookService
     IEnumerable<Book> SearchBook(string query);
     IEnumerable<Book> GetAllBooks();
     IEnumerable<Book> GetCheckedOutBooks();
-    public IEnumerable<Book> GetAvailableBooks();
+    IEnumerable<Book> GetAvailableBooks();
+    IEnumerable<Book> GetOverdueBooks();
     Book? GetBookById(Guid id);
     void CheckoutBook(Guid id);
     void ReturnBook(Guid id);

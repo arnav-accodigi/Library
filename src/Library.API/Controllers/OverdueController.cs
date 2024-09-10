@@ -15,6 +15,13 @@ public class OverdueController : ControllerBase
         this.bookService = bookService;
     }
 
+    [HttpGet("books")]
+    public IActionResult GetOverdueBooks()
+    {
+        var overdueBooks = bookService.GetOverdueBooks();
+        return Ok(new ResponseDto { Data = overdueBooks });
+    }
+
     [HttpGet("late-fee")]
     public IActionResult GetTotalLateFee()
     {

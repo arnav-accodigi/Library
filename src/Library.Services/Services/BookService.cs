@@ -47,6 +47,11 @@ public class BookService : IBookService
         return bookRepository.GetAll().Where(b => !b.IsCheckedOut);
     }
 
+    public IEnumerable<Book> GetOverdueBooks()
+    {
+        return bookRepository.GetAll().Where(b => b.IsOverdue());
+    }
+
     public void CheckoutBook(Guid id)
     {
         var book =

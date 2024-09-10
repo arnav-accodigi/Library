@@ -15,6 +15,18 @@ public class BorrowingController : ControllerBase
         this.bookService = bookService;
     }
 
+    [HttpGet("checked-out-books")]
+    public IActionResult GetCheckedOutBooks()
+    {
+        return Ok(new ResponseDto { Data = bookService.GetCheckedOutBooks() });
+    }
+
+    [HttpGet("available-books")]
+    public IActionResult GetAvailableBooks()
+    {
+        return Ok(new ResponseDto { Data = bookService.GetAvailableBooks() });
+    }
+
     [HttpPost("checkout/{id}")]
     public IActionResult CheckoutBook(Guid id)
     {
