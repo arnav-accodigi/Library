@@ -21,4 +21,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Library.Data/Library.Data.csproj" />
+    <ProjectReference Include="../Library.Services/Library.Services.csproj" />
+    <ProjectReference Include="../Library.API/Library.API.csproj" />
+  </ItemGroup>
 </Project>
