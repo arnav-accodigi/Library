@@ -1,7 +1,6 @@
 using Library.Data.Domain;
 using Library.Data.DTO;
 using Library.Services.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers;

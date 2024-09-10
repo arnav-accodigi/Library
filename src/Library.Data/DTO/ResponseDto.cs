@@ -1,5 +1,3 @@
-using System;
-
 namespace Library.Data.DTO;
 
 public class ResponseDto
