@@ -71,20 +71,9 @@ public class BookServiceTest
     [Fact]
     public void GetBookById_ShouldReturnTheBook()
     {
-        var guid = new Guid("c2b89de4-c44a-4cf5-b547-542ca2394451");
-        var bookWithId = new Book()
-        {
-            Title = "Yellowface",
-            Author = "RF Kuang",
-            IsCheckedOut = false,
-            IssueDate = null,
-            ReturnDate = null,
-            Id = guid,
-            CreatedOn = DateTime.Now
-        };
-        bookRepositoryMock.Setup(r => r.GetById(It.IsAny<Guid>())).Returns(bookWithId);
+        bookRepositoryMock.Setup(r => r.GetById(It.IsAny<Guid>())).Returns(initialBooks[3]);
 
-        var book = bookService.GetBookById(guid);
+        var book = bookService.GetBookById(It.IsAny<Guid>());
 
         Assert.NotNull(book);
         Assert.Equal("RF Kuang", book.Author);
