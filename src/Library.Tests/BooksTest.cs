@@ -158,6 +158,7 @@ public class BooksTest
     {
         var fee = bookService.GetTotalLateFee();
 
+        bookRepositoryMock.Verify(r => r.GetAll(), Times.Once);
         Assert.NotEqual(0, fee);
     }
 
@@ -166,6 +167,48 @@ public class BooksTest
     {
         var fee = bookService.GetLateFee(initialBooks[2].Id);
 
+        bookRepositoryMock.Verify(r => r.GetAll(), Times.Once);
         Assert.Equal(0, fee);
+    }
+
+    [Fact]
+    public void GetOverdueBooks_ShouldReturnOverdueBooks()
+    {
+        var overdueBooks = bookService.GetOverdueBooks();
+
+        bookRepositoryMock.Verify(r => r.GetAll(), Times.Once);
+        Assert.Single(overdueBooks);
+        Assert.Equal("Stephen King", overdueBooks.ToList()[0].Author);
+    }
+
+    [Fact]
+    public void GetCheckedoutBooks_ShouldReturnCheckedoutBooks()
+    {
+        var checkedOutBooks = bookService.GetCheckedOutBooks();
+
+        bookRepositoryMock.Verify(r => r.GetAll(), Times.Once);
+        Assert.Equal(2, checkedOutBooks.Count());
+        Assert.Equal("IT", checkedOutBooks.ToList()[0].Title);
+    }
+
+    [Fact]
+    public void GetAvailableBooks_ShouldReturnAvailableBooks()
+    {
+        var availableBooks = bookService.GetAvailableBooks();
+
+        bookRepositoryMock.Verify(r => r.GetAll(), Times.Once);
+        Assert.Equal(2, availableBooks.Count());
+        Assert.Equal("Run", availableBooks.ToList()[0].Title);
+    }
+
+    [Fact]
+    public void SearchBook_ShouldReturnSearchResults()
+    {
+        bookRepositoryMock.Setup(r => r.Search(It.IsAny<string>())).Returns([initialBooks[3]]);
+
+        var searchResults = bookService.SearchBook("yel");
+
+        bookRepositoryMock.Verify(r => r.Search(It.IsAny<string>()), Times.Once);
+        Assert.Single(searchResults);
     }
 }
