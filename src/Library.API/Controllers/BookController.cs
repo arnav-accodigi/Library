@@ -36,7 +36,7 @@ public class BookController : ControllerBase
         return Ok(new ResponseDto { Data = book });
     }
 
-    [HttpGet("checkedOut")]
+    [HttpGet("checked-out")]
     public IActionResult GetCheckedOutBooks()
     {
         return Ok(new ResponseDto { Data = bookService.GetCheckedOutBooks() });
@@ -79,54 +79,5 @@ public class BookController : ControllerBase
     {
         bookService.DeleteBookById(id);
         return NoContent();
-    }
-
-    [HttpPost("checkout/{id}")]
-    public IActionResult CheckoutBook(Guid id)
-    {
-        try
-        {
-            bookService.CheckoutBook(id);
-            return Ok(new ResponseDto { Message = $"Successfully checked out book with id ${id}" });
-        }
-        catch (Exception e)
-        {
-            return NotFound(new ResponseDto { Message = e.Message });
-        }
-    }
-
-    [HttpPost("return/{id}")]
-    public IActionResult ReturnBook(Guid id)
-    {
-        try
-        {
-            bookService.ReturnBook(id);
-            return Ok(new ResponseDto { Message = $"Successfully returned book with id ${id}" });
-        }
-        catch (Exception e)
-        {
-            return NotFound(new ResponseDto { Message = e.Message });
-        }
-    }
-
-    [HttpGet("totalLateFee")]
-    public IActionResult GetTotalLateFee()
-    {
-        var lateFee = bookService.GetTotalLateFee();
-        return Ok(new ResponseDto { Data = lateFee });
-    }
-
-    [HttpGet("lateFee/{id}")]
-    public IActionResult GetLateFee(Guid id)
-    {
-        try
-        {
-            var lateFee = bookService.GetLateFee(id);
-            return Ok(new ResponseDto { Data = lateFee });
-        }
-        catch (Exception e)
-        {
-            return NotFound(new ResponseDto { Message = e.Message });
-        }
     }
 }
