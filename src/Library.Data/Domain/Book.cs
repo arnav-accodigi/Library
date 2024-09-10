@@ -18,6 +18,11 @@ public class Book : BaseRecord
 
     public void Return()
     {
+        // if (!IsOverdue)
+        // {
+        //     throw new Exception("There is an overdue fee on the book, please clear the dues");
+        // }
+
         IssueDate = null;
         ReturnDate = null;
         IsCheckedOut = false;
