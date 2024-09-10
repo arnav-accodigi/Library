@@ -9,5 +9,5 @@ public interface IBookRepository
     IEnumerable<Book> Search(string query);
     Book Add(Book item);
     void DeleteById(Guid id);
-    Book GetById(Guid id);
+    Book? GetById(Guid id);
 }

@@ -8,9 +8,11 @@ public interface IBookService
     void DeleteBookById(Guid id);
     IEnumerable<Book> SearchBook(string query);
     IEnumerable<Book> GetAllBooks();
-    Book GetBookById(Guid id);
-    // IEnumerable<Book> GetCheckedOutBooks();
-    // void CheckoutBook(int id, DateTime dueDate);
-    // void ReturnBook(int id);
-    // decimal CalculateLateFees(int id);
+    IEnumerable<Book> GetCheckedOutBooks();
+    public IEnumerable<Book> GetAvailableBooks();
+    Book? GetBookById(Guid id);
+    void CheckoutBook(Guid id);
+    void ReturnBook(Guid id);
+    int GetTotalLateFee();
+    int GetLateFee(Guid id);
 }

@@ -33,8 +33,47 @@ public class BookService : IBookService
         return bookRepository.Search(query);
     }
 
-    public Book GetBookById(Guid id)
+    public Book? GetBookById(Guid id)
     {
         return bookRepository.GetById(id);
+    }
+
+    public IEnumerable<Book> GetCheckedOutBooks()
+    {
+        return bookRepository.GetAll().Where(b => b.IsCheckedOut);
+    }
+
+    public IEnumerable<Book> GetAvailableBooks()
+    {
+        return bookRepository.GetAll().Where(b => !b.IsCheckedOut);
+    }
+
+    public void CheckoutBook(Guid id)
+    {
+        var book =
+            GetAvailableBooks().FirstOrDefault(b => b.Id == id)
+            ?? throw new Exception("The requested book is not available");
+        book.Checkout();
+    }
+
+    public void ReturnBook(Guid id)
+    {
+        var book =
+            GetCheckedOutBooks().FirstOrDefault(b => b.Id == id)
+            ?? throw new Exception("The requested book has not been checked out");
+        book.Return();
+    }
+
+    public int GetTotalLateFee()
+    {
+        return GetCheckedOutBooks().Aggregate(0, (acc, x) => acc + x.CalculateLateFee());
+    }
+
+    public int GetLateFee(Guid id)
+    {
+        var book =
+            GetCheckedOutBooks().FirstOrDefault(b => b.Id == id)
+            ?? throw new Exception("The requested book has not been checked out");
+        return book.CalculateLateFee();
     }
 }
