@@ -97,7 +97,7 @@ public class BookServiceTest
         var book = new Book
         {
             Id = Guid.NewGuid(),
-            Title = "IT",
+            Title = "Carrie",
             Author = "Stephen King",
             CreatedOn = DateTime.Now,
             IsCheckedOut = false
