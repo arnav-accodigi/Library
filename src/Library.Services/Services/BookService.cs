@@ -11,12 +11,20 @@ public class BookService : IBookService
     {
         this.bookRepository = bookRepository;
     }
+    
+    // The Service classes are intended to act as the 'facade' into the services layer.  
+    // it should be receiving the DTO, transforming it into domain objects as needed, and returning response Dtos 
+    // as needed to the 'client', which in this case is your WebApi project
 
     public void AddBook(Book book)
     {
+        //No where do I see any validation that the book state is valid.
         bookRepository.Add(book);
     }
 
+    // if this were a real system, these would likely be calling a database and should support async/awaite
+    // to be most efficient
+    
     public void DeleteBookById(Guid id)
     {
         bookRepository.DeleteById(id);

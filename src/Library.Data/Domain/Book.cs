@@ -2,6 +2,13 @@ namespace Library.Data.Domain;
 
 public class Book : BaseRecord
 {
+    
+    //Greg:  I like that the domain object contains the logic to control its internal state.
+    
+    //
+    //  There should be unit tests for this class since it is more than just a few gets/sets/
+    //
+    
     public string Title { get; set; }
     public string Author { get; set; }
     public bool IsCheckedOut { get; set; }
@@ -10,6 +17,7 @@ public class Book : BaseRecord
 
     public void Checkout()
     {
+        //Greg:  no need for this comment line.  the code speaks for itself
         IssueDate = DateTime.Now;
         // Fixed lending period of 15 days
         ReturnDate = DateTime.Now.AddDays(15);
@@ -22,6 +30,8 @@ public class Book : BaseRecord
         // {
         //     throw new Exception("There is an overdue fee on the book, please clear the dues");
         // }
+        
+        //Greg: should not ever have code that is commented out.  
 
         IssueDate = null;
         ReturnDate = null;

@@ -3,10 +3,24 @@ using Library.Data.Repositories;
 using Library.Services.Services;
 using Moq;
 
-public class BookServiceTest
+public class BookServiceTest : IDisposable
 {
+    
+    //
+    // Nutrien is asking their partners to write unit tests.  the is only one here for the entire project
+    //
+    // You are using mocks, but not really verifying it.  
+    // I've added that should have already been here, and there are failing tests.
+    //
+    
+    
     private readonly Mock<IBookRepository> bookRepositoryMock;
     private readonly IBookService bookService;
+    
+    //
+    // if you are to write a complete system with multiple components and unit tests, the data setup
+    // should not exist here but in some class that can be reused across more tests.
+    //
     private readonly List<Book> initialBooks =
     [
         new()
@@ -54,9 +68,17 @@ public class BookServiceTest
     public BookServiceTest()
     {
         bookRepositoryMock = new Mock<IBookRepository>();
+        
+        //this should not be here.  if I'm calling a delete, this could not be called.
         bookRepositoryMock.Setup(r => r.GetAll()).Returns(initialBooks);
         bookService = new BookService(bookRepositoryMock.Object);
     }
+    
+    /// <summary>
+    /// as soon as I added this, you have a failing tests.  your setup method in the constructor
+    /// should not be there
+    /// </summary>
+    public void Dispose() => bookRepositoryMock.VerifyAll();
 
     [Fact]
     public void GetAllBooks_ShouldReturnAllBooks()
